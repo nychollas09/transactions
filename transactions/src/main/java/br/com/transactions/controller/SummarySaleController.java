@@ -14,13 +14,13 @@ import br.com.transactions.service.SummarySaleServiceImpl;
 @RequestMapping("api/summary-sale")
 public class SummarySaleController {
 
-    @Autowired
-    private SummarySaleServiceImpl service;
+  @Autowired
+  private SummarySaleServiceImpl service;
 
-    @GetMapping("find{number}")
-    public ResponseEntity<SummarySaleResource> findByNumber(
-            @PathVariable(value = "number") String number) {
-        return ResponseEntity.ok(service.findByNumberSummarySale(number));
-    }
+  @GetMapping("find/{number}")
+  public ResponseEntity<SummarySaleResource> findByNumber(
+      @PathVariable(value = "number") String number) {
+    return ResponseEntity.ok(service.findByNumberSummarySale(number));
+  }
 
 }
