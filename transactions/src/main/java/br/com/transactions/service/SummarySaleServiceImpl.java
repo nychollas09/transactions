@@ -23,14 +23,13 @@ public class SummarySaleServiceImpl implements SummarySaleService {
                 + "]"));
 
     return new SummarySaleResource(summarySale.getNetAmountSale(), summarySale.getGrossAmountSale(),
-        summarySale.getNumberOfInstallments(), summarySale.getMerchantDiscountRate(),
-        summarySale.getNumberSummarySale());
+        summarySale.getMerchantDiscountRate(), summarySale.getNumberSummarySale());
   }
 
   @Override
   public SummarySale save(SummarySaleResource summarySaleDTO) {
-    return summarySaleRepository.saveAndFlush(new SummarySale(summarySaleDTO.getNetAmountSale(),
-        summarySaleDTO.getGrossAmountSale(), summarySaleDTO.getNumberOfInstallments(),
-        summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+    return summarySaleRepository.saveAndFlush(
+        new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
+            summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
   }
 }
