@@ -12,7 +12,7 @@ import br.com.transactions.dto.TransactionDataTransferObject;
 import br.com.transactions.dto.SummarySaleResource;
 
 @Service
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService { 
 
   private static final Logger LOG = Logger.getLogger(TransactionServiceImpl.class);
 
