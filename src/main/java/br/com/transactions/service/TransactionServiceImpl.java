@@ -9,7 +9,7 @@ import br.com.transactions.domain.model.SummarySale;
 import br.com.transactions.domain.model.Transaction;
 import br.com.transactions.domain.repository.TransactionRepository;
 import br.com.transactions.dto.TransactionDataTransferObject;
-import br.com.transactions.dto.SummarySaleResource;
+import br.com.transactions.resource.SummarySaleResource;
 
 @Service
 public class TransactionServiceImpl implements TransactionService { 

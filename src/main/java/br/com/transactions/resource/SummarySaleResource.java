@@ -1,4 +1,4 @@
-package br.com.transactions.dto;
+package br.com.transactions.resource;
 
 import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonProperty;

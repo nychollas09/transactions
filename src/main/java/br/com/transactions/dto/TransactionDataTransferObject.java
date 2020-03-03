@@ -1,6 +1,7 @@
 package br.com.transactions.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import br.com.transactions.resource.SummarySaleResource;
 
 public class TransactionDataTransferObject {
 

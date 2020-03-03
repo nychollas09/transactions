@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import br.com.transactions.domain.model.SummarySale;
 import br.com.transactions.domain.repository.SummarySaleRepository;
-import br.com.transactions.dto.SummarySaleResource;
+import br.com.transactions.resource.SummarySaleResource;
 import br.com.transactions.service.exception.SummarySaleNotFoundException;
 
 @Component
