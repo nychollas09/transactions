@@ -1,17 +1,20 @@
 package br.com.transactions.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import java.util.UUID;
+import org.springframework.stereotype.Service;
 import br.com.transactions.domain.model.SummarySale;
 import br.com.transactions.domain.repository.SummarySaleRepository;
 import br.com.transactions.resource.SummarySaleResource;
 import br.com.transactions.service.exception.SummarySaleNotFoundException;
 
-@Component
+@Service
 public class SummarySaleServiceImpl implements SummarySaleService {
 
-  @Autowired
   private SummarySaleRepository summarySaleRepository;
+
+  public SummarySaleServiceImpl(SummarySaleRepository summarySaleRepository) {
+    this.summarySaleRepository = summarySaleRepository;
+  }
 
   @Override
   public SummarySaleResource findByNumberSummarySale(String number)
@@ -31,5 +34,10 @@ public class SummarySaleServiceImpl implements SummarySaleService {
     return summarySaleRepository.saveAndFlush(
         new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
             summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+  }
+
+  @Override
+  public void rollback(UUID uuid) {
+    summarySaleRepository.deleteById(uuid);
   }
 }
