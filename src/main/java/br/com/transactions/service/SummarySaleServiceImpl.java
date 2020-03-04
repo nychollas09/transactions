@@ -1,10 +1,11 @@
 package br.com.transactions.service;
 
-import java.util.UUID;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import br.com.transactions.domain.model.SummarySale;
 import br.com.transactions.domain.repository.SummarySaleRepository;
 import br.com.transactions.resource.SummarySaleResource;
+import br.com.transactions.service.exception.SummarySaleExistException;
 import br.com.transactions.service.exception.SummarySaleNotFoundException;
 
 @Service
@@ -30,14 +31,18 @@ public class SummarySaleServiceImpl implements SummarySaleService {
   }
 
   @Override
-  public SummarySale save(SummarySaleResource summarySaleDTO) {
-    return summarySaleRepository.saveAndFlush(
-        new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
-            summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+  public SummarySale save(SummarySaleResource summarySaleDTO) throws SummarySaleExistException {
+    Optional<SummarySale> optionalSummary =
+        summarySaleRepository.findByNumberSummarySale(summarySaleDTO.getNumberSummarySale());
+    if (optionalSummary.isPresent()) {
+      throw new SummarySaleExistException("This summary number[ "
+          + summarySaleDTO.getNumberSummarySale() + " ]already exists in the database!");
+    } else {
+      return summarySaleRepository.saveAndFlush(
+          new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
+              summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+
+    }
   }
 
-  @Override
-  public void rollback(UUID uuid) {
-    summarySaleRepository.deleteById(uuid);
-  }
 }

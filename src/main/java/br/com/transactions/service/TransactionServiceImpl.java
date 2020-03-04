@@ -27,9 +27,8 @@ public class TransactionServiceImpl implements TransactionService {
   @Override
   public void save(TransactionDataTransferObject requestDTO) {
     SummarySaleResource summarySaleDTO = requestDTO.getSummarySale();
-    SummarySale summarySale = summarySaleService.save(summarySaleDTO);
     try {
-
+      SummarySale summarySale = summarySaleService.save(summarySaleDTO);
       List<Transaction> transactions = ConvertTransaction.convert(requestDTO, summarySale);
 
       LOG.info("Saving count transactions [" + transactions.size() + "]");
@@ -37,7 +36,6 @@ public class TransactionServiceImpl implements TransactionService {
 
     } catch (Exception e) {
       LOG.error("Error trying to persist transactions", e.getMessage(), e);
-      summarySaleService.rollback(summarySale.getUuid());
     }
 
   }
