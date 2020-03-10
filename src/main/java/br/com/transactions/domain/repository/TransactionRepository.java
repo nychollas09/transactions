@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 import br.com.transactions.domain.model.Transaction;
 
 @Repository
-public interface TransactionRepository
-        extends JpaRepository<Transaction, UUID> {
+public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
 }
