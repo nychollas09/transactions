@@ -38,28 +38,20 @@ public class TransactionDataTransferObject {
   @NotNull(message = "holder_name is required!")
   private String holder;
 
-  public TransactionDataTransferObject(String merchantCode, String typeTransaction,
-      String countInstallments, String maskedCreditCardNumber, String capturedAt,
-      String paymentDate, SummarySaleResource summarySale, String holder) {
+  public TransactionDataTransferObject(
+      @NotNull(message = "merchant_code is required!") String merchantCode,
+      @NotNull(message = "type_transaction is required!") String typeTransaction,
+      @NotNull(message = "count_installments is required!") String countInstallments,
+      @NotNull(message = "masked_credit_card_number is required!") String maskedCreditCardNumber,
+      @NotNull(message = "captured_at is required!") String capturedAt,
+      @NotNull(message = "payment_date is required!") String paymentDate) {
     this.merchantCode = merchantCode;
     this.typeTransaction = typeTransaction;
     this.countInstallments = countInstallments;
     this.maskedCreditCardNumber = maskedCreditCardNumber;
     this.capturedAt = capturedAt;
     this.paymentDate = paymentDate;
-    this.summarySale = summarySale;
-    this.holder = holder;
   }
-
-  public TransactionDataTransferObject(String merchantCode, String typeTransaction,
-      String countInstallments, String capturedAt, String paymentDate) {
-    this.merchantCode = merchantCode;
-    this.typeTransaction = typeTransaction;
-    this.countInstallments = countInstallments;
-    this.capturedAt = capturedAt;
-    this.paymentDate = paymentDate;
-  }
-
 
   public String getMerchantCode() {
     return merchantCode;

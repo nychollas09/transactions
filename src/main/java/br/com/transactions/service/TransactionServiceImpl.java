@@ -48,8 +48,8 @@ public class TransactionServiceImpl implements TransactionService {
     transactionRepository.findAll().stream().forEach(transaction -> {
       TransactionDataTransferObject transactionDTO = new TransactionDataTransferObject(
           transaction.getMerchantCode(), transaction.getTransactionType().name(),
-          transaction.getNumberOfInstallments().toString(), transaction.getCapturedAt().toString(),
-          transaction.getPaymentDate().toString());
+          transaction.getNumberOfInstallments().toString(), transaction.getMaskedCreditCardNumber(),
+          transaction.getCapturedAt().toString(), transaction.getPaymentDate().toString());
 
       transactionsDTO.add(transactionDTO);
     });

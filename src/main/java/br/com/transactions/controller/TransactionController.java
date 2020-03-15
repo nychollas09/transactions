@@ -22,6 +22,7 @@ public class TransactionController {
   @PostMapping("save")
   public ResponseEntity<Void> save(
       @Validated @RequestBody TransactionDataTransferObject requestDTO) {
+    System.out.println("chegou");
     service.save(requestDTO);
     return ResponseEntity.ok().build();
   }
