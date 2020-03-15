@@ -29,6 +29,29 @@ public class TransactionDataTransferObject {
   @JsonProperty("holder_name")
   private String holder;
 
+  public TransactionDataTransferObject(String merchantCode, String typeTransaction,
+      String countInstallments, String maskedCreditCardNumber, String capturedAt,
+      String paymentDate, SummarySaleResource summarySale, String holder) {
+    this.merchantCode = merchantCode;
+    this.typeTransaction = typeTransaction;
+    this.countInstallments = countInstallments;
+    this.maskedCreditCardNumber = maskedCreditCardNumber;
+    this.capturedAt = capturedAt;
+    this.paymentDate = paymentDate;
+    this.summarySale = summarySale;
+    this.holder = holder;
+  }
+
+  public TransactionDataTransferObject(String merchantCode, String typeTransaction,
+      String countInstallments, String capturedAt, String paymentDate) {
+    this.merchantCode = merchantCode;
+    this.typeTransaction = typeTransaction;
+    this.countInstallments = countInstallments;
+    this.capturedAt = capturedAt;
+    this.paymentDate = paymentDate;
+  }
+
+
   public String getMerchantCode() {
     return merchantCode;
   }

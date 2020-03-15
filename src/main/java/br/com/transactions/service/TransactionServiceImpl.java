@@ -1,5 +1,6 @@
 package br.com.transactions.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,20 @@ public class TransactionServiceImpl implements TransactionService {
       LOG.error("Error trying to persist transactions", e.getMessage(), e);
     }
 
+  }
+
+  @Override
+  public List<TransactionDataTransferObject> findAll() {
+    List<TransactionDataTransferObject> transactionsDTO = new ArrayList<>();
+
+    transactionRepository.findAll().stream().forEach(transaction -> {
+      TransactionDataTransferObject transactionDTO = new TransactionDataTransferObject(
+          transaction.getMerchantCode(), transaction.getTransactionType().name(),
+          transaction.getNumberOfInstallments().toString(), transaction.getCapturedAt().toString(),
+          transaction.getPaymentDate().toString());
+
+      transactionsDTO.add(transactionDTO);
+    });
+    return transactionsDTO;
   }
 }
