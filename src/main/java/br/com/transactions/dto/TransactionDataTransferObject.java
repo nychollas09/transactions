@@ -1,32 +1,41 @@
 package br.com.transactions.dto;
 
+import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import br.com.transactions.resource.SummarySaleResource;
 
 public class TransactionDataTransferObject {
 
   @JsonProperty("merchant_code")
+  @NotNull(message = "merchant_code is required!")
   private String merchantCode;
 
   @JsonProperty("type_transaction")
+  @NotNull(message = "type_transaction is required!")
   private String typeTransaction;
 
   @JsonProperty("count_installments")
+  @NotNull(message = "count_installments is required!")
   private String countInstallments;
 
   @JsonProperty("masked_credit_card_number")
+  @NotNull(message = "masked_credit_card_number is required!")
   private String maskedCreditCardNumber;
 
   @JsonProperty("captured_at")
+  @NotNull(message = "captured_at is required!")
   private String capturedAt;
 
   @JsonProperty("payment_date")
+  @NotNull(message = "payment_date is required!")
   private String paymentDate;
 
   @JsonProperty("summary_sale")
+  @NotNull(message = "summary_sale is required!")
   private SummarySaleResource summarySale;
 
   @JsonProperty("holder_name")
+  @NotNull(message = "holder_name is required!")
   private String holder;
 
   public TransactionDataTransferObject(String merchantCode, String typeTransaction,

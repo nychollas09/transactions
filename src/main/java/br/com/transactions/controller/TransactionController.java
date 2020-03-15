@@ -3,6 +3,7 @@ package br.com.transactions.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +20,14 @@ public class TransactionController {
   private TransactionService service;
 
   @PostMapping("save")
-  public ResponseEntity<Void> save(@RequestBody TransactionDataTransferObject requestDTO) {
+  public ResponseEntity<Void> save(
+      @Validated @RequestBody TransactionDataTransferObject requestDTO) {
     service.save(requestDTO);
     return ResponseEntity.ok().build();
   }
-  
+
   @GetMapping("find")
-  public ResponseEntity<List<TransactionDataTransferObject>> findAll(){
+  public ResponseEntity<List<TransactionDataTransferObject>> findAll() {
     return ResponseEntity.ok(service.findAll());
   }
 
