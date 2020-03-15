@@ -1,5 +1,6 @@
 package br.com.transactions.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,11 @@ public class TransactionController {
   public ResponseEntity<Void> save(@RequestBody TransactionDataTransferObject requestDTO) {
     service.save(requestDTO);
     return ResponseEntity.ok().build();
+  }
+  
+  @GetMapping("find")
+  public ResponseEntity<List<TransactionDataTransferObject>> findAll(){
+    return ResponseEntity.ok(service.findAll());
   }
 
   @GetMapping("/scheduling")
