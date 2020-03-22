@@ -1,5 +1,6 @@
 package br.com.transactions.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,11 @@ public class SummarySaleController {
   public ResponseEntity<SummarySaleDataTransferObject> findByNumber(
       @PathVariable(value = "number") String number) {
     return ResponseEntity.ok(service.findByNumberSummarySale(number));
+  }
+
+  @GetMapping("find")
+  public ResponseEntity<List<SummarySaleDataTransferObject>> find() {
+    return ResponseEntity.ok(service.findAll());
   }
 
 }
