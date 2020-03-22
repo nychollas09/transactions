@@ -19,13 +19,19 @@ public class SummarySaleController {
 
   @GetMapping("find/{number}")
   public ResponseEntity<SummarySaleDataTransferObject> findByNumber(
-      @PathVariable(value = "number") String number) {
-    return ResponseEntity.ok(service.findByNumberSummarySale(number));
+      @PathVariable(value = "number", required = true) String number) {
+    return ResponseEntity.ok(service.findByNumber(number));
   }
 
   @GetMapping("find")
   public ResponseEntity<List<SummarySaleDataTransferObject>> find() {
     return ResponseEntity.ok(service.findAll());
+  }
+
+  @GetMapping("find/{numberOfInstallments}")
+  public ResponseEntity<List<SummarySaleDataTransferObject>> findByNumberOfInstallments(
+      @PathVariable(value = "numberOfInstallments", required = true) String numberOfInstallments) {
+    return ResponseEntity.ok(service.findByNumberOfInstallments(numberOfInstallments));
   }
 
 }
