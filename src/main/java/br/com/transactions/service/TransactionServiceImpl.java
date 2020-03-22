@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import br.com.transactions.convert.ConvertTransaction;
 import br.com.transactions.domain.model.SummarySale;
 import br.com.transactions.domain.model.Transaction;
+import br.com.transactions.domain.repository.SummarySaleRepository;
 import br.com.transactions.domain.repository.TransactionRepository;
+import br.com.transactions.dto.SummarySaleDataTransferObject;
 import br.com.transactions.dto.TransactionDataTransferObject;
-import br.com.transactions.resource.SummarySaleResource;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -17,19 +18,24 @@ public class TransactionServiceImpl implements TransactionService {
   private static final Logger LOG = Logger.getLogger(TransactionServiceImpl.class);
 
   private TransactionRepository transactionRepository;
-  private SummarySaleServiceImpl summarySaleService;
+  private SummarySaleRepository summarySaleRepository;
 
   public TransactionServiceImpl(TransactionRepository transactionRepository,
-      SummarySaleServiceImpl summarySaleService) {
+      SummarySaleRepository summarySaleRepository) {
     this.transactionRepository = transactionRepository;
-    this.summarySaleService = summarySaleService;
+    this.summarySaleRepository = summarySaleRepository;
   }
 
   @Override
   public void save(TransactionDataTransferObject requestDTO) {
-    SummarySaleResource summarySaleDTO = requestDTO.getSummarySale();
+    SummarySaleDataTransferObject summarySaleDTO = requestDTO.getSummarySale();
     try {
-      SummarySale summarySale = summarySaleService.save(summarySaleDTO);
+
+      SummarySale summarySale = summarySaleRepository.saveAndFlush(
+          new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
+              summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale(),
+              Integer.parseInt(requestDTO.getCountInstallments())));
+
       List<Transaction> transactions = ConvertTransaction.convert(requestDTO, summarySale);
 
       LOG.info("Saving count transactions [" + transactions.size() + "]");

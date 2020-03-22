@@ -38,6 +38,9 @@ public class SummarySale extends BaseEntity {
   @Column(name = "number_summary_sale")
   private Long numberSummarySale;
 
+  @Column(name = "number_of_installments")
+  private Integer numberOfInstallments;
+
   @OneToMany(mappedBy = "summarySale", fetch = FetchType.EAGER, orphanRemoval = false)
   private List<Transaction> transactions;
 
@@ -45,11 +48,12 @@ public class SummarySale extends BaseEntity {
   private SummarySale() {}
 
   public SummarySale(BigDecimal netAmountSale, BigDecimal grossAmountSale,
-      Double merchantDiscountRate, Long numberSummarySale) {
+      Double merchantDiscountRate, Long numberSummarySale, Integer numberOfInstallments) {
     this.netAmountSale = netAmountSale;
     this.grossAmountSale = grossAmountSale;
     this.merchantDiscountRate = merchantDiscountRate;
     this.numberSummarySale = numberSummarySale;
+    this.numberOfInstallments = numberOfInstallments;
   }
 
   public UUID getUuid() {

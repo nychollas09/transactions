@@ -1,12 +1,15 @@
 package br.com.transactions.service;
 
-import br.com.transactions.domain.model.SummarySale;
-import br.com.transactions.resource.SummarySaleResource;
-import br.com.transactions.service.exception.SummarySaleExistException;
+import java.util.List;
+import br.com.transactions.dto.SummarySaleDataTransferObject;
 
 public interface SummarySaleService {
-  SummarySaleResource findByNumberSummarySale(String number);
+  SummarySaleDataTransferObject findByNumber(String number);
 
-  SummarySale save(SummarySaleResource summarySaleDTO) throws SummarySaleExistException;
+  SummarySaleDataTransferObject save(SummarySaleDataTransferObject summarySaleDTO,
+      Integer numberOfInstallments);
 
+  List<SummarySaleDataTransferObject> findAll();
+
+  List<SummarySaleDataTransferObject> findByNumberOfInstallments(String numberOfInstallments);
 }
