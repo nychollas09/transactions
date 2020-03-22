@@ -1,5 +1,7 @@
 package br.com.transactions.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import br.com.transactions.domain.model.SummarySale;
@@ -14,6 +16,17 @@ public class SummarySaleServiceImpl implements SummarySaleService {
 
   public SummarySaleServiceImpl(SummarySaleRepository summarySaleRepository) {
     this.summarySaleRepository = summarySaleRepository;
+  }
+
+  public List<SummarySaleDataTransferObject> findAll() {
+    List<SummarySaleDataTransferObject> summarySaleDTOs = new ArrayList<>();
+    summarySaleRepository.findAll().stream().forEach(summary -> {
+      SummarySaleDataTransferObject summarySaleDTO = new SummarySaleDataTransferObject(
+          summary.getNetAmountSale(), summary.getGrossAmountSale(),
+          summary.getMerchantDiscountRate(), summary.getNumberSummarySale());
+      summarySaleDTOs.add(summarySaleDTO);
+    });
+    return summarySaleDTOs;
   }
 
   @Override
@@ -34,18 +47,23 @@ public class SummarySaleServiceImpl implements SummarySaleService {
   public SummarySaleDataTransferObject save(SummarySaleDataTransferObject summarySaleDTO) {
     Optional<SummarySale> optionalSummary =
         summarySaleRepository.findByNumberSummarySale(summarySaleDTO.getNumberSummarySale());
+    checkSummarySaleExist(summarySaleDTO, optionalSummary);
+
+    SummarySale summarySale = summarySaleRepository.saveAndFlush(
+        new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
+            summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+
+    return new SummarySaleDataTransferObject(summarySale.getNetAmountSale(),
+        summarySale.getGrossAmountSale(), summarySale.getMerchantDiscountRate(),
+        summarySale.getNumberSummarySale());
+
+  }
+
+  private void checkSummarySaleExist(SummarySaleDataTransferObject summarySaleDTO,
+      Optional<SummarySale> optionalSummary) {
     if (optionalSummary.isPresent()) {
       throw new IllegalArgumentException("This summary number[ "
           + summarySaleDTO.getNumberSummarySale() + " ]already exists in the database!");
-    } else {
-      SummarySale summarySale = summarySaleRepository.saveAndFlush(
-          new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
-              summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
-
-      return new SummarySaleDataTransferObject(summarySale.getNetAmountSale(),
-          summarySale.getGrossAmountSale(), summarySale.getMerchantDiscountRate(),
-          summarySale.getNumberSummarySale());
-
     }
   }
 
