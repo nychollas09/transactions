@@ -10,13 +10,17 @@
 	</parent>
 	<groupId>br.com.transactions</groupId>
 	<artifactId>transactions</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>transactions</name>
 	<description>Módulo de transacoes de cartão de crédito</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+
+	<prerequisites>
+		<maven>3.3.3</maven>
+	</prerequisites>
 
 	<dependencies>
 		<dependency>
@@ -39,11 +43,15 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
