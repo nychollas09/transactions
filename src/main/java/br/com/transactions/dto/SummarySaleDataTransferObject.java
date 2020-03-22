@@ -1,10 +1,10 @@
-package br.com.transactions.resource;
+package br.com.transactions.dto;
 
 import java.math.BigDecimal;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SummarySaleResource {
+public class SummarySaleDataTransferObject {
 
   @JsonProperty("net_amount_sale")
   @NotNull(message = "net_amount_sale is required!")
@@ -22,7 +22,7 @@ public class SummarySaleResource {
   @NotNull(message = "number_summary_sale is required!")
   private Long numberSummarySale;
 
-  public SummarySaleResource(BigDecimal netAmountSale, BigDecimal grossAmountSale,
+  public SummarySaleDataTransferObject(BigDecimal netAmountSale, BigDecimal grossAmountSale,
       Double merchantDiscountRate, Long numberSummarySale) {
     this.netAmountSale = netAmountSale;
     this.grossAmountSale = grossAmountSale;
