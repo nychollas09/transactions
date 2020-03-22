@@ -1,6 +1,0 @@
-br/com/transactions/domain/repository/SummarySaleRepositoryTest.class
-br/com/transactions/domain/utils/CardHolderTest.class
-br/com/transactions/TransactionsApplicationTests.class
-br/com/transactions/domain/utils/TransactionTypeTest.class
-br/com/transactions/domain/repository/TransactionRepositoryTest.class
-br/com/transactions/domain/utils/AgencyBankingTest.class
