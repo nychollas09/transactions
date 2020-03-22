@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import br.com.transactions.domain.model.SummarySale;
 import br.com.transactions.domain.repository.SummarySaleRepository;
@@ -31,15 +32,25 @@ public class SummarySaleServiceTest {
 
     SummarySale summarySaleOne = new SummarySale(BigDecimal.valueOf(98.00).setScale(2),
         BigDecimal.valueOf(100.00).setScale(2), Double.parseDouble("0.02"),
-        Long.parseLong("7364984"));
+        Long.parseLong("7364984"), 10);
     SummarySale summarySaleTwo =
         new SummarySale(BigDecimal.valueOf(8.00).setScale(2), BigDecimal.valueOf(10.00).setScale(2),
-            Double.parseDouble("0.02"), Long.parseLong("7364985"));
+            Double.parseDouble("0.02"), Long.parseLong("7364985"), 10);
 
     summarys = new ArrayList<>();
     summarys.add(summarySaleOne);
     summarys.add(summarySaleTwo);
 
+  }
+
+  @Test
+  public void shouldFindByNumberOfInstallments() {
+    BDDMockito.given(specification.byNumberOfInstallments(Long.parseLong("10")))
+        .willReturn(Mockito.any());
+
+    service.findByNumberOfInstallments("10");
+
+    BDDMockito.verify(specification).byNumberOfInstallments(Long.parseLong("10"));
   }
 
   @Test
