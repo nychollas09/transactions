@@ -2,7 +2,6 @@ package br.com.transactions.dto;
 
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import br.com.transactions.resource.SummarySaleResource;
 
 public class TransactionDataTransferObject {
 
@@ -32,7 +31,7 @@ public class TransactionDataTransferObject {
 
   @JsonProperty("summary_sale")
   @NotNull(message = "summary_sale is required!")
-  private SummarySaleResource summarySale;
+  private SummarySaleDataTransferObject summarySale;
 
   @JsonProperty("holder_name")
   @NotNull(message = "holder_name is required!")
@@ -109,11 +108,11 @@ public class TransactionDataTransferObject {
     this.paymentDate = paymentDate;
   }
 
-  public SummarySaleResource getSummarySale() {
+  public SummarySaleDataTransferObject getSummarySale() {
     return summarySale;
   }
 
-  public void setSummarySale(SummarySaleResource summarySale) {
+  public void setSummarySale(SummarySaleDataTransferObject summarySale) {
     this.summarySale = summarySale;
   }
 
