@@ -6,7 +6,8 @@ import br.com.transactions.dto.SummarySaleDataTransferObject;
 public interface SummarySaleService {
   SummarySaleDataTransferObject findByNumber(String number);
 
-  SummarySaleDataTransferObject save(SummarySaleDataTransferObject summarySaleDTO);
+  SummarySaleDataTransferObject save(SummarySaleDataTransferObject summarySaleDTO,
+      Integer numberOfInstallments);
 
   List<SummarySaleDataTransferObject> findAll();
 

@@ -33,7 +33,8 @@ public class TransactionServiceImpl implements TransactionService {
 
       SummarySale summarySale = summarySaleRepository.saveAndFlush(
           new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
-              summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+              summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale(),
+              Integer.parseInt(requestDTO.getCountInstallments())));
 
       List<Transaction> transactions = ConvertTransaction.convert(requestDTO, summarySale);
 

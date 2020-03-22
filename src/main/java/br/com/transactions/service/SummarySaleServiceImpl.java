@@ -64,14 +64,16 @@ public class SummarySaleServiceImpl implements SummarySaleService {
   }
 
   @Override
-  public SummarySaleDataTransferObject save(SummarySaleDataTransferObject summarySaleDTO) {
+  public SummarySaleDataTransferObject save(SummarySaleDataTransferObject summarySaleDTO,
+      Integer numberOfInstallments) {
     Optional<SummarySale> optionalSummary =
         repository.findByNumberSummarySale(summarySaleDTO.getNumberSummarySale());
     checkSummarySaleExist(summarySaleDTO, optionalSummary);
 
-    SummarySale summarySale = repository.saveAndFlush(
-        new SummarySale(summarySaleDTO.getNetAmountSale(), summarySaleDTO.getGrossAmountSale(),
-            summarySaleDTO.getMerchantDiscountRate(), summarySaleDTO.getNumberSummarySale()));
+    SummarySale summarySale =
+        repository.saveAndFlush(new SummarySale(summarySaleDTO.getNetAmountSale(),
+            summarySaleDTO.getGrossAmountSale(), summarySaleDTO.getMerchantDiscountRate(),
+            summarySaleDTO.getNumberSummarySale(), numberOfInstallments));
 
     return new SummarySaleDataTransferObject(summarySale.getNetAmountSale(),
         summarySale.getGrossAmountSale(), summarySale.getMerchantDiscountRate(),
