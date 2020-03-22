@@ -18,6 +18,7 @@ public class SummarySaleServiceImpl implements SummarySaleService {
     this.summarySaleRepository = summarySaleRepository;
   }
 
+  @Override
   public List<SummarySaleDataTransferObject> findAll() {
     List<SummarySaleDataTransferObject> summarySaleDTOs = new ArrayList<>();
     summarySaleRepository.findAll().stream().forEach(summary -> {
